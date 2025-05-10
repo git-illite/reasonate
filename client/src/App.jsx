@@ -1,8 +1,20 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Teach from "./pages/Teach";
+import Debate from "./pages/Debate";
+import Navbar from "./components/Navbar";
+
 export default function App() {
   return (
-    <div className="p-10 text-center">
-      <h1 className="text-3xl font-bold">Reasonate</h1>
-      <p className="mt-4">Your logic-first learning platform.</p>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+      <div className="p-6">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/teach/:id" element={<Teach />} />
+          <Route path="/debate" element={<Debate />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }

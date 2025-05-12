@@ -17,7 +17,7 @@ export default function Navbar() {
         <NavLink
           to="/teach"
           className={({ isActive }) =>
-            `hover:underline px-6 py-2 font-bold ${
+            `hover:underline px-6 py-2 font-bold dark:text-white ${
               isActive
                 ? "rounded bg-purple-300 dark:bg-gray-900 dark:text-white "
                 : ""
@@ -29,7 +29,7 @@ export default function Navbar() {
         <NavLink
           to="/debate"
           className={({ isActive }) =>
-            `hover:underline px-6 py-2 font-bold ${
+            `hover:underline px-6 py-2 font-bold dark:text-white${
               isActive
                 ? "rounded bg-purple-300 dark:bg-gray-900 dark:text-white "
                 : ""

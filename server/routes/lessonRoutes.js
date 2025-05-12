@@ -1,6 +1,6 @@
 import express from "express";
 import Lesson from "../models/lessonModel.js";
-import protect from "../middleware/protect.js";
+import { protect, adminCheck } from "../middleware/authMiddleWare.js";
 
 const router = express.Router();
 
@@ -21,7 +21,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // POST lesson (protected)
-router.post("/", protect, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const newLesson = new Lesson({
       ...req.body,

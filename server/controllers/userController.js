@@ -7,6 +7,7 @@ import generateToken from "../utils/generateToken.js";
 // @access Public
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+  console.log("email: ", email, " password: ", password);
 
   const user = await User.findOne({ email });
 
@@ -15,7 +16,7 @@ const authUser = asyncHandler(async (req, res) => {
       _id: user._id,
       email: user.email,
       name: user.name,
-      isAdmin: user.isAdmin,
+      role: user.role,
       token: generateToken(user._id),
     });
   } else {
@@ -28,7 +29,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @route POST /api/users/
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
 
   const userExists = await User.findOne({ email });
   if (userExists) {
@@ -39,6 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
+    role,
   });
 
   if (user) {
@@ -47,7 +49,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       email: user.email,
       name: user.name,
-      isAdmin: user.isAdmin,
+      role: user.role,
       token: generateToken(user._id),
     });
   } else {
@@ -66,7 +68,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       _id: user._id,
       email: user.email,
       name: user.name,
-      isAdmin: user.isAdmin,
+      role: user.role,
     });
   } else {
     res.status(404);
@@ -90,7 +92,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       _id: updatedUser._id,
       email: updatedUser.email,
       name: updatedUser.name,
-      isAdmin: updatedUser.isAdmin,
+      role: updatedUser.role,
       token: generateToken(updatedUser._id),
     });
   } else {
@@ -112,6 +114,7 @@ const getUsers = asyncHandler(async (req, res) => {
 // @access Private/Admin
 const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
+  console.log(user);
 
   if (user) {
     await User.deleteOne(user);
@@ -144,13 +147,13 @@ const updatedUser = asyncHandler(async (req, res) => {
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
-    user.isAdmin = req.body.isAdmin;
+    user.role = req.body.role;
     const updatedUser = await user.save();
     res.json({
       _id: updatedUser._id,
       email: updatedUser.email,
       name: updatedUser.name,
-      isAdmin: updatedUser.isAdmin,
+      role: updatedUser.role,
     });
   } else {
     res.status(404);

@@ -39,7 +39,11 @@ export default function Login() {
             If you are already a member, easily log in.
           </p>
 
-          {error && <p className="text-red-600 text-sm mb-4">{error}</p>}
+          {error && (
+            <p className="text-red-600 dark:text-blue-300 text-sm mb-4">
+              {error}
+            </p>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
@@ -69,7 +73,7 @@ export default function Login() {
             <div className="h-px flex-1 bg-gray-300"></div>
           </div>
 
-          <button className="w-full border border-gray-300 rounded py-2 flex items-center justify-center gap-2  hover:bg-purple-800 hover:text-white text-purple-500 dark:border-gray-300">
+          <button className="w-full border border-gray-300 rounded py-2 flex items-center justify-center gap-2 dark:text-white hover:bg-purple-800 hover:text-white text-purple-500 dark:border-gray-300">
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"
               alt="Google"

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../axios.js";
 
@@ -28,7 +28,7 @@ export default function Login() {
     }
   };
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+    <div className=" rounded-lg flex items-center justify-center py-12 bg-blue-100">
       <div className="bg-white dark:bg-purple-500 rounded-lg shadow-md flex w-full max-w-4xl overflow-hidden">
         {/* Form Side */}
         <div className="w-full md:w-1/2 p-8">

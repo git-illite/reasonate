@@ -1,8 +1,13 @@
 // ✅ src/pages/LessonList.jsx
 import { Link } from "react-router-dom";
 import lessons from "../data/lessons";
+import { useAuth } from "../context/AuthContext";
 
 export default function LessonList() {
+  const { user, login, logout } = useAuth();
+  if (user) {
+    console.log("Logged in as:", user.name, " ", user.email);
+  }
   return (
     <div className="max-w-xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Choose a Lesson</h1>

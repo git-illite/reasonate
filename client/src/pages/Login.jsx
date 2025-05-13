@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../axios.js";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { user, login } = useAuth();
+  if (user) {
+    console.log("Logged in as:", user.name, " ", user.email);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +24,8 @@ export default function Login() {
       });
       console.log(axios.baseURL);
 
-      localStorage.setItem("user", JSON.stringify(res.data));
+      login(res.data);
+
       navigate("/");
     } catch (err) {
       const message =

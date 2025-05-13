@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../axios.js";
+import { useAuth } from "../context/AuthContext.jsx";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -9,6 +10,7 @@ export default function Register() {
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +23,7 @@ export default function Register() {
         password,
       });
 
-      localStorage.setItem("user", JSON.stringify(res.data));
+      login(res.data);
       navigate("/");
     } catch (err) {
       const message =
